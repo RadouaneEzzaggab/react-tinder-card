@@ -116,58 +116,26 @@ const TinderCard = React.forwardRef(
       }
     }))
 
-    const handleSwipeReleased = React.useCallback(
-      async (setSpringTarget, gesture) => {
-        // Check if this is a swipe
-        const dir = getSwipeDirection({
-          x: swipeRequirementType === 'velocity' ? gesture.vx : gesture.dx,
-          y: swipeRequirementType === 'velocity' ? gesture.vy : gesture.dy
-        })
 
-        if (dir !== 'none') {
-          if (flickOnSwipe) {
-            if (!preventSwipe.includes(dir)) {
-              if (onSwipe) onSwipe(dir)
-
-              await animateOut(swipeRequirementType === 'velocity' ? ({
-                x: gesture.vx,
-                y: gesture.vy
-              }) : (
-                normalize({ x: gesture.dx, y: gesture.dy }) // Normalize to avoid flicking the card away with super fast speed only direction is wanted here
-              ), setSpringTarget, swipeRequirementType)
-              if (onCardLeftScreen) onCardLeftScreen(dir)
-              return
-            }
-          }
-        }
-
-        // Card was not flicked away, animate back to start
-        animateBack(setSpringTarget)
-      },
-      [swipeRequirementType, flickOnSwipe, preventSwipe, onSwipe, onCardLeftScreen]
-    )
 
     let swipeThresholdFulfilledDirection = 'none'
 
-    const gestureStateFromWebEvent = (ev, startPositon, lastPosition, isTouch) => {
-      let dx = isTouch ? ev.touches[0].clientX - startPositon.x : ev.clientX - startPositon.x
-      let dy = isTouch ? ev.touches[0].clientY - startPositon.y : ev.clientY - startPositon.y
+    // const gestureStateFromWebEvent = (ev, startPositon, lastPosition, isTouch) => {
+    //   let dx = isTouch ? ev.touches[0].clientX - startPositon.x : ev.clientX - startPositon.x
+    //   let dy = isTouch ? ev.touches[0].clientY - startPositon.y : ev.clientY - startPositon.y
 
-      // We cant calculate velocity from the first event
-      if (startPositon.x === 0 && startPositon.y === 0) {
-        dx = 0
-        dy = 0
-      }
+    //   // We cant calculate velocity from the first event
+    //   if (startPositon.x === 0 && startPositon.y === 0) {
+    //     dx = 0
+    //     dy = 0
+    //   }
 
-      const vx = -(dx - lastPosition.dx) / (lastPosition.timeStamp - Date.now())
-      const vy = -(dy - lastPosition.dy) / (lastPosition.timeStamp - Date.now())
+    //   const vx = -(dx - lastPosition.dx) / (lastPosition.timeStamp - Date.now())
+    //   const vy = -(dy - lastPosition.dy) / (lastPosition.timeStamp - Date.now())
 
-      const gestureState = { dx, dy, vx, vy, timeStamp: Date.now() }
-      return gestureState
-    }
-
-    React.useLayoutEffect(() => {
-    })
+    //   const gestureState = { dx, dy, vx, vy, timeStamp: Date.now() }
+    //   return gestureState
+    // }
 
     const element = React.useRef()
 
