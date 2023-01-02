@@ -1,9 +1,6 @@
 const React = require('react')
 const { useSpring, animated } = require('@react-spring/web')
 
-const height = window.innerHeight
-const width = window.innerWidth
-
 const settings = {
   maxTilt: 25, // in deg
   rotationPower: 50,
@@ -36,7 +33,7 @@ const normalize = (vector) => {
 }
 
 const animateOut = async (gesture, setSpringTarget) => {
-  const diagonal = pythagoras(height, width)
+  const diagonal = pythagoras( window.innerHeight, window.innerWidth)
   const velocity = pythagoras(gesture.x, gesture.y)
   const finalX = diagonal * gesture.x
   const finalY = diagonal * gesture.y
