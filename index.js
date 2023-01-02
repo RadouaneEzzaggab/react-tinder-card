@@ -90,31 +90,31 @@ const TinderCard = React.forwardRef(
   ) => {
     const [{ xyrot }, setSpringTarget] = useSpring(() => ({
       xyrot: [0, 0, 0],
-      config: physics.touchResponsive
+      // config: physics.touchResponsive
     }))
 
     settings.swipeThreshold = swipeThreshold
 
-    // React.useImperativeHandle(ref, () => ({
-    //   async swipe (dir = 'right') {
-    //     if (onSwipe) onSwipe(dir)
-    //     const power = 1.3
-    //     const disturbance = (Math.random() - 0.5) / 2
-    //     if (dir === 'right') {
-    //       await animateOut({ x: power, y: disturbance }, setSpringTarget)
-    //     } else if (dir === 'left') {
-    //       await animateOut({ x: -power, y: disturbance }, setSpringTarget)
-    //     } else if (dir === 'up') {
-    //       await animateOut({ x: disturbance, y: power }, setSpringTarget)
-    //     } else if (dir === 'down') {
-    //       await animateOut({ x: disturbance, y: -power }, setSpringTarget)
-    //     }
-    //     if (onCardLeftScreen) onCardLeftScreen(dir)
-    //   },
-    //   async restoreCard () {
-    //     await animateBack(setSpringTarget)
-    //   }
-    // }))
+    React.useImperativeHandle(ref, () => ({
+      async swipe (dir = 'right') {
+        if (onSwipe) onSwipe(dir)
+        const power = 1.3
+        const disturbance = (Math.random() - 0.5) / 2
+        if (dir === 'right') {
+          await animateOut({ x: power, y: disturbance }, setSpringTarget)
+        } else if (dir === 'left') {
+          await animateOut({ x: -power, y: disturbance }, setSpringTarget)
+        } else if (dir === 'up') {
+          await animateOut({ x: disturbance, y: power }, setSpringTarget)
+        } else if (dir === 'down') {
+          await animateOut({ x: disturbance, y: -power }, setSpringTarget)
+        }
+        if (onCardLeftScreen) onCardLeftScreen(dir)
+      },
+      async restoreCard () {
+        await animateBack(setSpringTarget)
+      }
+    }))
 
 
 
