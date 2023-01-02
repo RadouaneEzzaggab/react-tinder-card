@@ -93,6 +93,8 @@ const TinderCard = React.forwardRef(
       config: physics.touchResponsive
     }))
 
+    console.log('Ref : ', ref)
+
     settings.swipeThreshold = swipeThreshold
 
     React.useImperativeHandle(ref, () => ({
