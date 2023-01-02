@@ -40,6 +40,8 @@ const animateOut = async (gesture, setSpringTarget) => {
   const finalRotation = gesture.x * 45
   const duration = diagonal / velocity
 
+  console.log('Duration  : ', duration)
+
   setSpringTarget.start({
     xyrot: [finalX, finalY, finalRotation],
     config: { duration: duration }
@@ -89,8 +91,6 @@ const TinderCard = React.forwardRef(
       xyrot: [0, 0, 0],
       config: physics.touchResponsive
     }))
-
-    console.log('Ref : ', ref)
 
     settings.swipeThreshold = swipeThreshold
 
