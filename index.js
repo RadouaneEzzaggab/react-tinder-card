@@ -173,8 +173,8 @@ const TinderCard = React.forwardRef(
         ref: element,
         className,
         style: {
+          ...style,
           transform: xyrot.to((x, y, rot) => `translate3d(${x}px, ${y}px, ${0}px) rotate(${rot}deg)`),
-          ...style
         },
         children
       })
