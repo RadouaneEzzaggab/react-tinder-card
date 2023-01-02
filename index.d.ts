@@ -84,6 +84,8 @@ declare interface Props {
    * The children passed in is what will be rendered as the actual Tinder-style card.
    */
   children?: React.ReactNode
+
+  style?: CSSProperties | undefined
 }
 
 declare const TinderCard: React.FC<Props>
